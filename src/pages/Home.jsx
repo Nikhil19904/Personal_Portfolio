@@ -1,31 +1,132 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import Particles from 'react-tsparticles';
+import { loadFull } from 'tsparticles';
+import { Typewriter } from 'react-simple-typewriter';
+import { FaArrowRight, FaDownload, FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { SiLeetcode } from 'react-icons/si';
 
 const Home = () => {
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-white flex flex-col items-center justify-center px-4 text-center">
-      <h1 className="text-4xl md:text-6xl font-extrabold text-blue-700 mb-4">
-        Welcome to My Portfolio
-      </h1>
-      <p className="text-lg md:text-xl text-gray-700 mb-6 max-w-2xl">
-        I’m a passionate developer who loves creating beautiful and functional web applications.
-        Explore my projects, skills, education, and more!
-      </p>
+  const particlesInit = useCallback(async (engine) => {
+    await loadFull(engine);
+  }, []);
 
-      <div className="flex flex-wrap gap-4 justify-center">
-        <Link
-          to="/projects"
-          className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition"
+  return (
+    <div className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden bg-gradient-to-br from-blue-900 via-purple-800 to-indigo-900">
+
+      {/* Particle Background */}
+      <Particles
+        id="tsparticles"
+        init={particlesInit}
+        className="absolute top-0 left-0 w-full h-full z-0"
+        options={{
+          fullScreen: { enable: false },
+          background: { color: { value: 'transparent' } },
+          particles: {
+            number: { value: 60 },
+            size: { value: 3 },
+            move: { enable: true, speed: 1 },
+            opacity: { value: 0.5 },
+            shape: { type: 'circle' },
+            links: {
+              enable: true,
+              distance: 150,
+              color: '#ffffff',
+              opacity: 0.3,
+              width: 1,
+            },
+          },
+        }}
+      />
+
+      {/* Main Card */}
+      <motion.div
+        className="z-10 flex flex-col md:flex-row items-center bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl shadow-2xl p-6 md:p-10 max-w-5xl w-full"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: 'easeOut' }}
+      >
+        {/* Image Section */}
+        <motion.div
+          className="w-40 h-40 md:w-64 md:h-64 rounded-2xl overflow-hidden shadow-xl mb-6 md:mb-0 md:mr-10 flex-shrink-0"
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.3 }}
         >
-          View Projects
-        </Link>
-        <Link
-          to="/contact"
-          className="border border-blue-600 text-blue-600 px-6 py-2 rounded-md hover:bg-blue-100 transition"
-        >
-          Contact Me
-        </Link>
-      </div>
+          <img
+            src="/myphoto.jpg" // ✅ Replace with your image path
+            alt="Mayank"
+            className="w-full h-full object-cover"
+          />
+        </motion.div>
+
+        {/* Text Content */}
+        <div className="text-center md:text-left">
+          <motion.h1
+            className="text-3xl md:text-5xl font-extrabold text-white mb-4"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+          >
+            👋 Hi, I'm Mayank
+          </motion.h1>
+
+          <motion.h2 className="text-lg md:text-2xl text-yellow-300 font-medium mb-4">
+            <Typewriter
+              words={['Frontend Developer', 'React Enthusiast', 'Problem Solver', 'Tech Explorer']}
+              loop={true}
+              cursor
+              cursorStyle="|"
+              typeSpeed={70}
+              deleteSpeed={50}
+              delaySpeed={2000}
+            />
+          </motion.h2>
+
+          <p className="text-gray-100 mb-6 text-base md:text-lg">
+            I build interactive and responsive websites that look great and perform even better.
+          </p>
+
+          {/* Social Links */}
+          <div className="flex justify-center md:justify-start gap-4 mb-6">
+            {[
+              { icon: <FaGithub />, link: 'https://github.com/your-github' },
+              { icon: <FaLinkedin />, link: 'https://www.linkedin.com/in/your-linkedin' },
+              { icon: <SiLeetcode />, link: 'https://leetcode.com/your-leetcode' },
+              { icon: <FaInstagram />, link: 'https://www.instagram.com/your-instagram' },
+            ].map((social, i) => (
+              <a
+                key={i}
+                href={social.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-purple-600 text-white w-10 h-10 flex items-center justify-center rounded-full text-xl hover:bg-purple-700 active:scale-90 transition-transform duration-200 shadow-md"
+              >
+                {social.icon}
+              </a>
+            ))}
+          </div>
+
+          {/* Buttons */}
+          <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+            <Link
+              to="/projects"
+              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-3 rounded-lg transition-all duration-300 shadow-lg"
+            >
+              View Projects <FaArrowRight />
+            </Link>
+
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-medium px-5 py-3 rounded-lg transition-all duration-300 shadow-lg"
+            >
+              Download Resume <FaDownload />
+            </a>
+          </div>
+        </div>
+      </motion.div>
     </div>
   );
 };

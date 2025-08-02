@@ -6,6 +6,7 @@ import Projects from './pages/Projects';
 import Skills from './pages/Skills';
 import Education from './pages/Education';
 import ContactUs from './pages/ContactUs';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -19,7 +20,9 @@ function App() {
         { <Route path="/education" element={<Education />} /> }
         { <Route path="/contact" element={<ContactUs />} /> }
         {/* Add other routes here */}
+
       </Routes>
+      <Footer/>
     </>
   );
 }

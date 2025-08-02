@@ -1,70 +1,78 @@
 import React, { useState } from 'react';
+import { FaPaperPlane } from 'react-icons/fa';
 
 const ContactUs = () => {
-  const [form, setForm] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
+  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', form);
-    // TODO: send to backend via fetch/axios
-    alert("Thank you for contacting us!");
-    setForm({ name: '', email: '', message: '' });
+    setLoading(true);
+
+    // Simulate network delay
+    setTimeout(() => {
+      console.log('Form submitted:', form);
+      alert('Thank you for contacting us!');
+      setForm({ name: '', email: '', message: '' });
+      setLoading(false);
+    }, 2000);
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-10">
-      <div className="max-w-2xl w-full bg-white shadow-md rounded-xl p-8">
-        <h2 className="text-3xl font-bold text-center text-blue-700 mb-6">Contact Us</h2>
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Full Name</label>
-            <input
-              type="text"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              required
-              className="mt-1 w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your full name"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Email Address</label>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              required
-              className="mt-1 w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your email"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Message</label>
-            <textarea
-              name="message"
-              value={form.message}
-              onChange={handleChange}
-              required
-              rows="4"
-              className="mt-1 w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500"
-              placeholder="Write your message here"
-            ></textarea>
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 flex items-center justify-center px-4 py-12">
+      <div className="w-full max-w-3xl bg-white rounded-3xl shadow-2xl overflow-hidden p-8">
+        <h2 className="text-4xl font-bold text-center text-blue-800 mb-10">📩 Contact Us</h2>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {['name', 'email', 'message'].map((field, i) => (
+            <div className="relative" key={i}>
+              {field !== 'message' ? (
+                <input
+                  type={field === 'email' ? 'email' : 'text'}
+                  name={field}
+                  value={form[field]}
+                  onChange={handleChange}
+                  required
+                  className="peer w-full px-4 pt-6 pb-2 text-gray-900 placeholder-transparent border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  placeholder={field}
+                />
+              ) : (
+                <textarea
+                  name="message"
+                  value={form.message}
+                  onChange={handleChange}
+                  required
+                  rows="4"
+                  className="peer w-full px-4 pt-6 pb-2 text-gray-900 placeholder-transparent border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  placeholder="Message"
+                />
+              )}
+              <label className="absolute left-4 top-2 text-sm text-gray-500 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 transition-all capitalize">
+                {field === 'message' ? 'Your Message' : field === 'name' ? 'Full Name' : 'Email Address'}
+              </label>
+            </div>
+          ))}
+
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition"
+            disabled={loading}
+            className={`w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl flex justify-center items-center gap-3 text-lg transition ${
+              loading ? 'opacity-70 cursor-not-allowed' : ''
+            }`}
           >
-            Send Message
+            {loading ? (
+              <>
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                Sending...
+              </>
+            ) : (
+              <>
+                <FaPaperPlane /> Send Message
+              </>
+            )}
           </button>
         </form>
       </div>

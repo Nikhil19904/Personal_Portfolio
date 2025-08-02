@@ -1,4 +1,5 @@
 import React from 'react';
+import { GraduationCap } from 'lucide-react';
 
 const Education = () => {
   const educationList = [
@@ -23,18 +24,23 @@ const Education = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 px-6 py-10">
-      <h2 className="text-4xl font-bold text-center text-gray-800 mb-8">Education</h2>
-      <div className="max-w-4xl mx-auto space-y-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white py-10 px-6">
+      <h2 className="text-4xl font-bold text-center text-blue-800 mb-12">🎓 My Education Journey</h2>
+      
+      <div className="relative max-w-4xl mx-auto border-l-4 border-blue-600 pl-6 space-y-12">
         {educationList.map((edu, index) => (
-          <div
-            key={index}
-            className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition duration-300"
-          >
-            <h3 className="text-2xl font-semibold text-blue-700">{edu.institute}</h3>
-            <p className="text-gray-700 mt-1">{edu.degree}</p>
-            <p className="text-gray-500">{edu.duration}</p>
-            <p className="text-sm text-gray-600 mt-2">Grade: {edu.grade}</p>
+          <div key={index} className="relative group">
+            <span className="absolute -left-[30px] top-1 bg-white border-4 border-blue-600 rounded-full p-2 shadow">
+              <GraduationCap className="h-5 w-5 text-blue-600" />
+            </span>
+            <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition duration-300">
+              <h3 className="text-xl font-semibold text-blue-700">{edu.institute}</h3>
+              <p className="text-gray-800 mt-1">{edu.degree}</p>
+              <div className="flex justify-between text-sm text-gray-500 mt-2">
+                <span>{edu.duration}</span>
+                <span className="font-medium">Grade: {edu.grade}</span>
+              </div>
+            </div>
           </div>
         ))}
       </div>
