@@ -19,7 +19,7 @@ const Projects = () => {
         "A full-stack contact form with Node.js backend, MySQL database, and frontend validation.",
       tech: ["Node.js", "Express", "MySQL", "React"],
       liveLink: "#",
-      codeLink: "#",
+      codeLink: "https://github.com/Nikhil19904/ShopNest",
       image: "images/shopnest.png",
     },
     {
@@ -28,26 +28,26 @@ const Projects = () => {
         "A secure authentication system with OTP verification and Google/GitHub login using OAuth.",
       tech: ["Node.js", "OAuth", "JWT", "MongoDB"],
       liveLink: "#",
-      codeLink: "#",
-      image: "https://source.unsplash.com/600x400/?login,security",
+      codeLink: "https://github.com/Nikhil19904/PlayTube",
+      image: "",
     },
     {
       title: "Customer Service Platform",
       description:
         "A modern e-commerce web app with product filtering, cart system, and Stripe payments.",
       tech: ["React", "Redux", "TailWindCSS", "Intercom"],
-      liveLink: "#",
-      codeLink: "#",
-      image: "https://source.unsplash.com/600x400/?ecommerce,shop",
+      liveLink: "https://customer-service-platform-my.vercel.app/",
+      codeLink: "https://github.com/Nikhil19904/Customer-Service-Platform",
+      image: "images/csp.png",
     },
     {
       title: "Personal Portfolio",
       description:
         "A real-time chat application with WebSocket, emoji picker, and typing indicators.",
       tech: ["React", "HTML", "JavaScript"],
-      liveLink: "#",
-      codeLink: "#",
-      image: "https://source.unsplash.com/600x400/?chat,app",
+      liveLink: "https://personal-portfolio-ivory-ten.vercel.app/",
+      codeLink: "https://github.com/Nikhil19904/Personal_Portfolio",
+      image: "images/portfolio.png",
     },
     {
       title: "SafeVision",
@@ -55,8 +55,8 @@ const Projects = () => {
         "A weather dashboard with live API data, geolocation, and dark/light mode support.",
       tech: ["React", "Express", "Node.js" ,"Mysql"],
       liveLink: "#",
-      codeLink: "#",
-      image: "https://source.unsplash.com/600x400/?weather,forecast",
+      codeLink: "https://github.com/Nikhil19904/SafeVision",
+      image: "images/camsecurity.png",
     },
   ];
 

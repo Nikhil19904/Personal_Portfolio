@@ -63,7 +63,7 @@ const Home = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
             >
-              👋 Hi, I'm Mayank
+              👋 Hi, I'm Nikhil
             </motion.h1>
 
             <motion.h2 className="text-lg md:text-2xl text-yellow-300 font-medium mb-4">
