@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -16,7 +17,7 @@ const Contact = () => {
     try {
       await axios.post("http://localhost:5000/api/contact", formData);
       setStatus("✅ Message sent successfully!");
-      setFormData({ name: "", email: "", message: "" }); // Reset form
+      setFormData({ name: "", email: "", message: "" });
     } catch (error) {
       console.error(error);
       setStatus("❌ Failed to send message.");
@@ -24,44 +25,89 @@ const Contact = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-xl">
-      <h2 className="text-2xl font-bold mb-4">Contact Me</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          name="name"
-          placeholder="Your Name"
-          value={formData.name}
-          onChange={handleChange}
-          className="w-full border rounded px-3 py-2"
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Your Email"
-          value={formData.email}
-          onChange={handleChange}
-          className="w-full border rounded px-3 py-2"
-          required
-        />
-        <textarea
-          name="message"
-          placeholder="Your Message"
-          value={formData.message}
-          onChange={handleChange}
-          className="w-full border rounded px-3 py-2"
-          rows="4"
-          required
-        />
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-        >
-          Send Message
-        </button>
-      </form>
-      {status && <p className="mt-4 text-center">{status}</p>}
+    <div className="relative min-h-screen flex items-center justify-center px-6 py-16 bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100">
+      {/* Glassy Card */}
+      <motion.div
+        className="w-full max-w-md bg-white/70 backdrop-blur-lg p-8 rounded-2xl shadow-xl border border-gray-200"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+          📩 Contact Me
+        </h2>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            value={formData.name}
+            onChange={handleChange}
+            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
+            required
+          />
+          <textarea
+            name="message"
+            placeholder="Your Message"
+            value={formData.message}
+            onChange={handleChange}
+            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-400 transition resize-none"
+            rows="5"
+            required
+          />
+          <motion.button
+            type="submit"
+            className="w-full bg-gradient-to-r from-purple-500 to-blue-500 text-white px-4 py-2 rounded-lg font-semibold shadow-lg hover:scale-105 hover:shadow-2xl transition transform"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Send Message
+          </motion.button>
+        </form>
+
+        {/* Status Message */}
+        <AnimatePresence>
+          {status && (
+            <motion.p
+              className="mt-4 text-center text-sm font-medium"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.5 }}
+            >
+              {status}
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </motion.div>
+
+      {/* Background Sparkles */}
+      <span className="absolute top-10 left-1/4 w-2 h-2 bg-white rounded-full opacity-50 animate-sparkle"></span>
+      <span className="absolute top-1/2 right-1/3 w-2 h-2 bg-white rounded-full opacity-50 animate-sparkle animation-delay-1000"></span>
+      <span className="absolute bottom-16 left-1/2 w-2 h-2 bg-white rounded-full opacity-50 animate-sparkle animation-delay-2000"></span>
+
+      <style>{`
+        @keyframes sparkle {
+          0% { transform: translateY(0) scale(1); opacity: 0.5; }
+          50% { transform: translateY(-4px) scale(1.2); opacity: 1; }
+          100% { transform: translateY(0) scale(1); opacity: 0.5; }
+        }
+        .animate-sparkle {
+          animation: sparkle 1.5s ease-in-out infinite;
+        }
+        .animation-delay-1000 { animation-delay: 1s; }
+        .animation-delay-2000 { animation-delay: 2s; }
+      `}</style>
     </div>
   );
 };
