@@ -10,7 +10,7 @@ const Education = () => {
       duration: " Dec. 2021 – July 2025",
       grade: "7.5 CGPA",
       year: "2025",
-      image: "/images/usar.jpg", // apna college photo yaha lagana
+      image: "/images/mait.jpg", // apna college photo yaha lagana
     },
     {
       institute: "M.R.L Senior Secondary School, Delhi",
@@ -18,7 +18,7 @@ const Education = () => {
       duration: "April 2020 –  July 2021",
       grade: "70.6%",
       year: "2021",
-      image: "/images/school12.jpg", // apna 12th school photo
+      image: "/images/mrl.jpg", // apna 12th school photo
     },
     {
       institute: "M.R.L Senior Secondary School, Delhi",
@@ -26,7 +26,7 @@ const Education = () => {
       duration: " April 2018 – May 2019",
       grade: "72%",
       year: "2019",
-      image: "/images/school10.jpg", // apna 10th school photo
+      image: "/images/mrl1.jpg", // apna 10th school photo
     },
   ];
 

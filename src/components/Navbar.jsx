@@ -15,6 +15,8 @@ export default function Navbar() {
     { name: "Skills", path: "/skills" },
     { name: "Projects", path: "/projects" },
     { name: "Education", path: "/education" },
+    { name: "Experience", path: "/experience" },  // ✅ New Experience Section
+    { name: "Blogs", path: "/blogs" },
     { name: "Contact Us", path: "/contact" },
   ];
 
@@ -30,7 +32,10 @@ export default function Navbar() {
     <nav className="bg-gradient-to-r from-blue-700 to-blue-900 text-white shadow-lg fixed w-full top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="text-2xl font-bold tracking-wide hover:text-yellow-400 transition duration-300">
+        <Link
+          to="/"
+          className="text-2xl font-bold tracking-wide hover:text-yellow-400 transition duration-300"
+        >
           MyPortfolio
         </Link>
 
@@ -41,7 +46,9 @@ export default function Navbar() {
               key={link.name}
               to={link.path}
               className={`relative group font-medium ${
-                location.pathname === link.path ? "text-yellow-300" : "text-white"
+                location.pathname === link.path
+                  ? "text-yellow-300"
+                  : "text-white"
               } transition duration-300`}
             >
               {link.name}

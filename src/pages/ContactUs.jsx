@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
+import { FaWhatsapp } from "react-icons/fa";
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -37,6 +38,7 @@ const Contact = () => {
           📩 Contact Me
         </h2>
 
+        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
@@ -89,6 +91,19 @@ const Contact = () => {
             </motion.p>
           )}
         </AnimatePresence>
+
+        {/* WhatsApp Contact Button */}
+        <div className="mt-6 flex justify-center">
+          <a
+            href="https://wa.me/91910960074" // Apna WhatsApp number yaha daalo
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-full font-medium shadow-lg transition-transform transform hover:scale-105"
+          >
+            <FaWhatsapp className="text-xl" />
+            Chat on WhatsApp
+          </a>
+        </div>
       </motion.div>
 
       {/* Background Sparkles */}
