@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [time, setTime] = useState(new Date().toLocaleTimeString());
@@ -61,6 +62,7 @@ export default function Navbar() {
         <div className="hidden md:block text-yellow-300 font-semibold bg-gradient-to-r from-blue-800 to-blue-700 px-4 py-1 rounded-full shadow-md border border-yellow-400">
           🕒 {time}
         </div>
+      
 
         {/* Mobile Menu Icon */}
         <div className="md:hidden flex items-center space-x-4">

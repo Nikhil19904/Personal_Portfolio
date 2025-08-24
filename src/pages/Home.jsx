@@ -3,12 +3,21 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Particles from "react-tsparticles";
 import { Typewriter } from "react-simple-typewriter";
-import { FaArrowRight, FaDownload, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import {
+  FaArrowRight,
+  FaDownload,
+  FaGithub,
+  FaLinkedin,
+  FaTwitter,
+} from "react-icons/fa";
 import { SiLeetcode } from "react-icons/si";
+// import Github from "../components/GitHubGraph";
+import LeetCodeStats from "../components/LeetCodeStats";
+//  import GitHubGraph from "../components/GitHubGraph";
 
 const Home = () => {
   return (
-    <div className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden bg-gradient-to-br from-blue-900 via-purple-800 to-indigo-900">
+    <div className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden bg-gradient-to-br from-blue-900 via-purple-800 to-indigo-900">
       {/* Particle Background */}
       <Particles
         id="tsparticles"
@@ -34,9 +43,9 @@ const Home = () => {
         }}
       />
 
-      {/* Main Glass Container with Transparent Border */}
+      {/* Main Glass Container */}
       <motion.div
-        className="z-10 relative max-w-5xl w-full rounded-3xl p-[2px] bg-gradient-to-r from-purple-400/40 via-white/20 to-blue-400/40"
+        className="z-10 relative max-w-7xl w-full rounded-3xl p-[2px] bg-gradient-to-r from-purple-400/40 via-white/20 to-blue-400/40"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
@@ -49,14 +58,14 @@ const Home = () => {
             transition={{ duration: 0.3 }}
           >
             <img
-              src="images/Photo.jpg" // ✅ Replace with your image
-              alt="Mayank"
+              src="images/Photo.jpg"
+              alt="Nikhil"
               className="w-full h-full object-cover"
             />
           </motion.div>
 
           {/* Text Content */}
-          <div>
+          <div className="flex-1">
             <motion.h1
               className="text-3xl md:text-5xl font-extrabold text-white mb-4"
               initial={{ opacity: 0, y: -20 }}
@@ -122,12 +131,20 @@ const Home = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-medium px-5 py-3 rounded-lg transition-all duration-300 shadow-lg"
               >
-                 Resume <FaDownload />
+                Resume <FaDownload />
               </a>
             </div>
           </div>
+
+          {/* LeetCode Stats Right */}
+          <div className="flex-1 flex justify-center md:justify-end mt-6 md:mt-0">
+            <LeetCodeStats username="Nikhil_19904" />
+          </div>
         </div>
       </motion.div>
+      
+      {/* 🔹 Niche GitHub + LeetCode box removed */}
+      {/* <GitHubGraph/> */}
     </div>
   );
 };

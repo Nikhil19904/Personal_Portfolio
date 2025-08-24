@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+// import GitHubGraph from "./Github";
 
 const FloatingFooter = () => {
   return (
@@ -7,7 +8,7 @@ const FloatingFooter = () => {
       {/* Background floating blurred circles */}
       <div className="absolute -top-24 -left-24 w-56 h-56 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
       <div className="absolute -bottom-24 -right-24 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
-
+    
       {/* Center Text */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
