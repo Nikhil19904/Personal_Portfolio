@@ -71,13 +71,13 @@ const Projects = () => {
       </h2>
 
       {/* Outer Frame with Blue Border */}
-      <div className="relative max-w-6xl mx-auto border-2 border-blue-500 rounded-1xl p-8">
+      <div className="relative max-w-6xl mx-auto border-2 border-blue-500 p-8">
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {projects.map((project, index) => (
             <motion.div
               key={index}
-              className="relative bg-blue-50 text-gray-800 border border-blue-200 shadow-lg flex flex-col overflow-hidden group rounded-xl"
+              className="relative bg-blue-50 text-gray-800 shadow-lg flex flex-col overflow-hidden group"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -99,7 +99,7 @@ const Projects = () => {
                     href={project.liveLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1 rounded hover:opacity-90 text-xs font-semibold shadow-md"
+                    className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1 hover:opacity-90 text-xs font-semibold shadow-md"
                   >
                     <FaEye /> View Project
                   </a>
@@ -118,7 +118,7 @@ const Projects = () => {
                     {project.tech.map((t, i) => (
                       <span
                         key={i}
-                        className="bg-gradient-to-r from-purple-100 via-pink-100 to-yellow-100 text-purple-700 px-3 py-1 text-xs font-semibold rounded-full shadow-sm"
+                        className="bg-gradient-to-r from-purple-100 via-pink-100 to-yellow-100 text-purple-700 px-3 py-1 text-xs font-semibold shadow-sm"
                       >
                         {t}
                       </span>
@@ -132,7 +132,7 @@ const Projects = () => {
                     href={project.codeLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 border border-blue-600 text-blue-600 px-4 py-2 hover:bg-blue-50 transition-all text-sm font-semibold rounded-lg"
+                    className="flex items-center gap-2 border border-blue-600 text-blue-600 px-4 py-2 hover:bg-blue-50 transition-all text-sm font-semibold"
                   >
                     <FaCode /> Code
                   </a>

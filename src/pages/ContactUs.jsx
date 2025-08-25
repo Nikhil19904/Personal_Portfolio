@@ -95,7 +95,7 @@ const Contact = () => {
         {/* WhatsApp Contact Button */}
         <div className="mt-6 flex justify-center">
           <a
-            href="https://wa.me/91910960074" // Apna WhatsApp number yaha daalo
+            href="https://wa.me/919910960074" // Apna WhatsApp number yaha daalo
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-full font-medium shadow-lg transition-transform transform hover:scale-105"
