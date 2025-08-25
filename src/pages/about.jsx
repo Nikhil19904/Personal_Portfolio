@@ -67,10 +67,10 @@ export default function About() {
 
           {/* Resume Button */}
           <motion.a
-            href="/resume.pdf"
+            href="https://drive.google.com/file/d/1EYbqVXYHqfQCdnj_HDWcbIrTjZzILzi5/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition-all duration-300 flex items-center gap-2 hover:scale-105 hover:shadow-2xl"
+            className="inline-block bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold py-3 px-2 rounded-lg shadow-lg transition-all duration-300 flex items-center gap-2 hover:scale-105 hover:shadow-2xl"
             whileHover={{ scale: 1.05 }}
           >
             Resume

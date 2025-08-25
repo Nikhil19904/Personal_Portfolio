@@ -10,23 +10,23 @@ const Education = () => {
       duration: " Dec. 2021 – July 2025",
       grade: "7.5 CGPA",
       year: "2025",
-      image: "/images/mait.jpg", // apna college photo yaha lagana
+      image: "/images/mait.jpg",
     },
     {
       institute: "M.R.L Senior Secondary School, Delhi",
       degree: "Senior Secondary Education (12th)",
-      duration: "April 2020 –  July 2021",
-      grade: "70.6%",
+      duration: "May 2017 –  July 2021",
+      grade: "71%",
       year: "2021",
-      image: "/images/mrl.jpg", // apna 12th school photo
+      image: "/images/mrl.jpg",
     },
     {
-      institute: "M.R.L Senior Secondary School, Delhi",
-      degree: "Higher Secondary Education (10th)",
-      duration: " April 2018 – May 2019",
-      grade: "72%",
+      institute: "Goldy Modern Girls Higher Secondary School, Ghaziabad",
+      degree: "Primary Education ",
+      duration: " April 2007 – March 2013",
+      grade: "86%",
       year: "2019",
-      image: "/images/mrl1.jpg", // apna 10th school photo
+      image: "/images/school.jpg",
     },
   ];
 
@@ -37,7 +37,7 @@ const Education = () => {
       <div className="absolute inset-0 bg-white/40 backdrop-blur-sm" />
 
       {/* Content */}
-      <div className="relative py-19 px-6">
+      <div className="relative py-20 px-6">
         <h2 className="text-4xl font-extrabold text-center mb-14">
           🎓 My{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500">
@@ -57,7 +57,9 @@ const Education = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: index * 0.2 }}
-                className="relative pl-20"
+                className={`relative pl-20 ${
+                  index === educationList.length - 1 ? "mb-16" : ""
+                }`} // last card extra gap
               >
                 {/* Timeline Node */}
                 <span className="absolute left-0 top-8 w-10 h-10 rounded-full bg-white border-4 border-blue-600 flex items-center justify-center shadow-lg">
@@ -84,7 +86,9 @@ const Education = () => {
                     <h3 className="text-xl font-semibold text-gray-900">
                       {edu.institute}
                     </h3>
-                    <p className="text-blue-700 mt-1 font-medium">{edu.degree}</p>
+                    <p className="text-blue-700 mt-1 font-medium">
+                      {edu.degree}
+                    </p>
                     <div className="flex justify-between text-sm text-gray-600 mt-3">
                       <span>{edu.duration}</span>
                       <span className="font-semibold text-gray-800">

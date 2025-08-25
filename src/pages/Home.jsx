@@ -126,8 +126,8 @@ const Home = () => {
               </Link>
 
               <a
-                href="/resume.pdf"
-                target="_blank"
+                href="https://drive.google.com/file/d/1EYbqVXYHqfQCdnj_HDWcbIrTjZzILzi5/view?usp=sharing"
+                target=""
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-medium px-5 py-3 rounded-lg transition-all duration-300 shadow-lg"
               >
