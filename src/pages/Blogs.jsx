@@ -1,74 +1,38 @@
 import React from "react";
+import { TwitterTweetEmbed } from "react-twitter-embed";
 import { motion } from "framer-motion";
-import { FaHeart, FaShareAlt, FaRegCommentDots } from "react-icons/fa";
 
-const blogs = [
-  {
-    id: 1,
-    title: "Getting Started with React",
-    description: "Learn the basics of React.js and how to build your first component.",
-    date: "Aug 20, 2025",
-    author: "Nikhil",
-  },
-  {
-    id: 2,
-    title: "Mastering Tailwind CSS",
-    description: "Discover how to style modern apps quickly with Tailwind CSS.",
-    date: "Aug 15, 2025",
-    author: "Nikhil",
-  },
-  {
-    id: 3,
-    title: "Framer Motion Animations",
-    description: "Bring your UI to life with beautiful animations using Framer Motion.",
-    date: "Aug 10, 2025",
-    author: "Nikhil",
-  },
+const tweetIds = [
+  "1959167403520364654",
+  "1959167403520364654",
+  "1959167403520364654",
 ];
 
 const Blogs = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-blue-50 py-20 px-6">
-      <h1 className="text-4xl font-bold text-center text-gray-800 mb-12">
-        📖 My Blogs
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 py-20 px-6">
+      <h1 className="text-4xl font-bold text-center text-white mb-12">
+        📝 My Blogs from Twitter
       </h1>
 
-      <div className="max-w-3xl mx-auto space-y-6">
-        {blogs.map((blog) => (
+      <div className="max-w-3xl mx-auto grid gap-10 md:grid-cols-2">
+        {tweetIds.map((id, index) => (
           <motion.div
-            key={blog.id}
-            className="bg-white/90 backdrop-blur-md rounded-2xl shadow-sm border border-gray-200 p-6 hover:shadow-lg transition"
-            whileHover={{ scale: 1.01 }}
+            key={index}
+            whileHover={{ scale: 1.03, boxShadow: "0px 8px 25px rgba(0,0,0,0.25)" }}
+            className="relative group bg-white/90 backdrop-blur-md border border-gray-200 p-4 rounded-xl shadow-md transition-all overflow-hidden"
           >
-            {/* Top Section: Author + Date */}
-            <div className="flex items-center mb-4">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 flex items-center justify-center text-white font-bold text-lg">
-                {blog.author[0]}
-              </div>
-              <div className="ml-3">
-                <h3 className="font-semibold text-gray-800">{blog.author}</h3>
-                <p className="text-xs text-gray-500">📅 {blog.date}</p>
-              </div>
-            </div>
+            {/* Gradient accent bar */}
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500" />
 
-            {/* Blog Content */}
-            <h2 className="text-lg font-semibold text-gray-900 mb-2">
-              {blog.title}
-            </h2>
-            <p className="text-gray-600 text-sm mb-4">{blog.description}</p>
+            {/* Glow ring effect */}
+            <div className="absolute inset-0 rounded-xl border border-transparent group-hover:border-blue-400 transition duration-300 pointer-events-none" />
 
-            {/* Actions like Twitter */}
-            <div className="flex justify-between text-gray-500 text-sm mt-4">
-              <button className="flex items-center space-x-1 hover:text-blue-500 transition">
-                <FaRegCommentDots /> <span>Comment</span>
-              </button>
-              <button className="flex items-center space-x-1 hover:text-green-500 transition">
-                <FaShareAlt /> <span>Share</span>
-              </button>
-              <button className="flex items-center space-x-1 hover:text-red-500 transition">
-                <FaHeart /> <span>Like</span>
-              </button>
-            </div>
+            {/* Twitter Embed */}
+            <TwitterTweetEmbed tweetId={id} />
+
+            {/* Decorative bottom line */}
+            <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 opacity-0 group-hover:opacity-100 transition" />
           </motion.div>
         ))}
       </div>
