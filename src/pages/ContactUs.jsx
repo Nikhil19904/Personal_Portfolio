@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import API from "../api"; // ✅ axios instance import
 import { motion, AnimatePresence } from "framer-motion";
 import { FaWhatsapp, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
@@ -39,7 +39,7 @@ const Contact = () => {
     setStatus("sending");
 
     try {
-      await axios.post("http://localhost:5000/api/contact", formData);
+      await API.post("/api/contact", formData); // ✅ API instance used
       setStatus("success");
       setFormData({ name: "", email: "", message: "" });
       localStorage.removeItem("contactForm");
@@ -182,36 +182,6 @@ const Contact = () => {
           </a>
         </div>
       </motion.div>
-
-      {/* Background Sparkles */}
-      <span className="absolute top-10 left-1/4 w-2 h-2 bg-white rounded-full opacity-50 animate-sparkle"></span>
-      <span className="absolute top-1/2 right-1/3 w-2 h-2 bg-white rounded-full opacity-50 animate-sparkle animation-delay-1000"></span>
-      <span className="absolute bottom-16 left-1/2 w-2 h-2 bg-white rounded-full opacity-50 animate-sparkle animation-delay-2000"></span>
-
-      <style>{`
-        @keyframes sparkle {
-          0% { transform: translateY(0) scale(1); opacity: 0.5; }
-          50% { transform: translateY(-4px) scale(1.2); opacity: 1; }
-          100% { transform: translateY(0) scale(1); opacity: 0.5; }
-        }
-        .animate-sparkle {
-          animation: sparkle 1.5s ease-in-out infinite;
-        }
-        .animation-delay-1000 { animation-delay: 1s; }
-        .animation-delay-2000 { animation-delay: 2s; }
-        .loader {
-          border: 2px solid white;
-          border-top: 2px solid transparent;
-          border-radius: 50%;
-          width: 18px;
-          height: 18px;
-          display: inline-block;
-          animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin {
-          to { transform: rotate(360deg); }
-        }
-      `}</style>
     </div>
   );
 };
