@@ -1,77 +1,78 @@
 const express = require("express");
 const cors = require("cors");
-const bodyParser = require("body-parser");
-const dotenv = require("dotenv");
 const nodemailer = require("nodemailer");
-const db = require("./src/db");
+const dotenv = require("dotenv");
+const mysql = require("mysql2/promise");
 
 dotenv.config();
+
 const app = express();
-const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
-// Create table if not exists
-db.query(
-  `CREATE TABLE IF NOT EXISTS contacts (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255),
-    email VARCHAR(255),
-    message TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-  )`,
-  (err) => {
-    if (err) console.error(err);
-    else console.log("✅ Table ready");
+// MySQL Connection
+let db;
+(async () => {
+  try {
+    db = await mysql.createPool({
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      database: process.env.DB_NAME,
+    });
+    console.log("✅ Connected to MySQL");
+  } catch (err) {
+    console.error("❌ MySQL Connection Failed:", err);
   }
-);
+})();
 
-// Email Transporter
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
-
-// Routes
-app.post("/api/contact", (req, res) => {
+// Contact API
+app.post("/api/contact", async (req, res) => {
   const { name, email, message } = req.body;
 
   if (!name || !email || !message) {
-    return res.status(400).json({ error: "All fields are required." });
+    return res.status(400).json({ success: false, message: "All fields are required!" });
   }
 
-  // Save to MySQL
-  db.query(
-    "INSERT INTO contacts (name, email, message) VALUES (?, ?, ?)",
-    [name, email, message],
-    (err, result) => {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({ error: "Database error" });
-      }
+  try {
+    // 1️⃣ Save in MySQL
+    await db.query("INSERT INTO messages (name, email, message) VALUES (?, ?, ?)", [
+      name,
+      email,
+      message,
+    ]);
 
-      // Send Email Notification
-      const mailOptions = {
-        from: process.env.EMAIL_USER,
-        to: process.env.EMAIL_USER,
-        subject: `New Contact Form Submission from ${name}`,
-        text: `Name: ${name}\nEmail: ${email}\nMessage:\n${message}`,
-      };
+    // 2️⃣ Send Email
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD,
+      },
+    });
 
-      transporter.sendMail(mailOptions, (err, info) => {
-        if (err) console.error("Email Error:", err);
-      });
+    const mailOptions = {
+      from: email,
+      to: process.env.EMAIL,
+      subject: `New Contact Form Submission from ${name}`,
+      text: `
+        Name: ${name}
+        Email: ${email}
+        Message: ${message}
+      `,
+    };
 
-      return res.json({ message: "Message sent successfully!" });
-    }
-  );
+    await transporter.sendMail(mailOptions);
+
+    res.json({ success: true, message: "Message saved and sent successfully!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Failed to process request" });
+  }
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-});
+// Start Server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
