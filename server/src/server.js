@@ -28,6 +28,11 @@ let db;
   }
 })();
 
+// ✅ Root route (for testing in browser)
+app.get("/", (req, res) => {
+  res.send("🚀 Backend is running successfully!");
+});
+
 // Contact API
 app.post("/api/contact", async (req, res) => {
   const { name, email, message } = req.body;
