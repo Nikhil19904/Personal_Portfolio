@@ -8,11 +8,14 @@ dotenv.config();
 
 const app = express();
 
-// Middleware
-app.use(cors());
+// ✅ Middleware
+app.use(cors({
+  origin: ["http://localhost:3000", "https://your-frontend-domain.com"], // frontend origins
+  methods: ["GET", "POST"],
+}));
 app.use(express.json());
 
-// MySQL Connection
+// ✅ MySQL Connection
 let db;
 (async () => {
   try {
@@ -33,7 +36,7 @@ app.get("/", (req, res) => {
   res.send("🚀 Backend is running successfully!");
 });
 
-// Contact API
+// ✅ Contact API
 app.post("/api/contact", async (req, res) => {
   const { name, email, message } = req.body;
 
@@ -51,16 +54,18 @@ app.post("/api/contact", async (req, res) => {
 
     // 2️⃣ Send Email
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true, // true for 465
       auth: {
         user: process.env.EMAIL,
-        pass: process.env.PASSWORD,
-
+        pass: process.env.EMAIL_PASS, // ⚡ Use Gmail App Password, not normal password
       },
     });
 
     const mailOptions = {
-      from: email,
+      from: `"Portfolio Contact" <${process.env.EMAIL}>`,
+      replyTo: email,
       to: process.env.EMAIL,
       subject: `New Contact Form Submission from ${name}`,
       text: `
@@ -72,13 +77,13 @@ app.post("/api/contact", async (req, res) => {
 
     await transporter.sendMail(mailOptions);
 
-    res.json({ success: true, message: "Message saved and sent successfully!" });
+    res.json({ success: true, message: "Message saved and email sent successfully!" });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, message: "Failed to process request" });
+    console.error("❌ Error in /api/contact:", error);
+    res.status(500).json({ success: false, message: error.message });
   }
 });
 
-// Start Server
+// ✅ Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
