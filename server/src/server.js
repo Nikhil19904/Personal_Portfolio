@@ -55,6 +55,7 @@ app.post("/api/contact", async (req, res) => {
       auth: {
         user: process.env.EMAIL,
         pass: process.env.PASSWORD,
+
       },
     });
 
