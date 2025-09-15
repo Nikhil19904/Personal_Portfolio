@@ -45,6 +45,10 @@ app.post("/api/contact", async (req, res) => {
   }
 
   try {
+    // 🟢 Debugging lines (check env values)
+    console.log("📧 Using email:", process.env.EMAIL);
+    console.log("🔑 Email pass exists:", !!process.env.EMAIL_PASS);
+
     // 1️⃣ Save in MySQL
     await db.query("INSERT INTO messages (name, email, message) VALUES (?, ?, ?)", [
       name,

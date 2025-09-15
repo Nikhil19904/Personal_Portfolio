@@ -17,7 +17,7 @@ export default function Navbar() {
     { name: "Projects", path: "/projects" },
     { name: "Education", path: "/education" },
     { name: "Experience", path: "/experience" },  // ✅ New Experience Section
-    { name: "Blogs", path: "/blogs" },
+    // { name: "Blogs", path: "/blogs" },
     { name: "Contact Us", path: "/contact" },
   ];
 

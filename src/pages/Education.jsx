@@ -16,7 +16,7 @@ const Education = () => {
       institute: "M.R.L Senior Secondary School, Delhi",
       degree: "Senior Secondary Education (12th)",
       duration: "May 2017 –  July 2021",
-      grade: "71%",
+      grade: "70.6%",
       year: "2021",
       image: "/images/mrl.jpg",
     },
